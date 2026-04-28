@@ -41,7 +41,7 @@
 
 - **Karoui** → gestione dati meteo,salvataggoio dati e creazione grafici
 
-## **8. Flusso del programma 
+## **8. Flusso del programma**d 
 - **Menu iniziale**
 - Cerca meteo
 - Mostra grafico
