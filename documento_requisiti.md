@@ -1,4 +1,4 @@
-# **Documento dei requisiti - Progetto Meteo e infio città - Lorenzi,Karoui**
+# **Documento dei requisiti - Progetto Meteo e info città - Lorenzi,Karoui**
 
 ## **1. Titolo del progetto**
  - Meteo e Info Città
@@ -41,20 +41,8 @@
 
 - **Karoui** → gestione dati meteo,salvataggoio dati e creazione grafici
 
-## **8. Flusso del programma**d 
-- **Menu iniziale**
-- Cerca meteo
-- Mostra grafico
-- Esci
-- **Selezione “Cerca meteo”**
-
-- Inserimento città
-- Visualizzazione dati meteo
-- Salvataggio dati
-- **Selezione “Mostra grafico”**
-- Inserimento città
-- Generazione grafico
-- Ritorno al menu principale dopo ogni operazione
+## **8. Flusso del programma** 
+![alt text](image.png)
 
 ## **9. Cronoprogramma**
 
