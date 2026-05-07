@@ -57,10 +57,29 @@
 - Ritorno al menu principale dopo ogni operazione
 
 ## **9. Cronoprogramma**
-- **Settimana 1** → scelta del progetto, ricerca API meteo e stesura requisiti
-- **Settimana 2** → sviluppo struttura base e menu
-- **Settimana 3** → salvataggio dati
 
-- **Settimana 4** → creazione grafici e documentazione
+# Diagramma di Gantt - App Meteo
 
+```mermaid
+gantt
+    title PROGRAMMA DI SVILUPPO - APP METEO
+    dateFormat YYYY-MM-DD
+    axisFormat Settimana %W
+    tickInterval 1week
 
+    %% La timeline parte esattamente con la settimana 1
+    section Lorenzi
+    Analisi e Requisiti     :a1, 2026-01-05, 7d
+    Struttura Base          :a2, after a1, 7d
+    Gestione I/O            :a3, after a2, 7d
+    Menù Principale         :a4, after a3, 4d
+    API Meteo               :a5, after a4, 4d
+
+    section Karoui
+    Ricerca API             :b1, 2026-01-05, 7d
+    Analisi Dati            :b2, after b1, 7d
+    Salvataggio Dati        :b3, after b2, 7d
+    Grafici Meteo           :b4, after b3, 4d
+    Integrazione e Test     :b5, after b4, 4d
+    Documentazione          :b6, after b5, 4d
+```
