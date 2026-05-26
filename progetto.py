@@ -1,42 +1,87 @@
-import requests 
-#importa la libreria requests usata per fare richieste a siti su internet.
-
+import requests
 import pandas as pd
-#Importa pandas che serve per lavorare con tabelle e file CSV
-
 import matplotlib.pyplot as plt
-#Importa matplotlib che serve per creare grafici
-
 from datetime import datetime
-#Dalla libreria già esistente su python importa datetime che serve per ottenere data e ora attuali
 
 CHIAVE_API = "b4820b2abbe3d0764b71ed2dc1f38453"
-#Salva la chiave API in una variabile, questa chiave serve per poter usare i servizi meteo
+
 
 def ottieni_meteo(citta):
-#Definisce una funzione ottieni meteo che riceve in ingresso una citta
     url = f"http://api.openweathermap.org/data/2.5/weather?q={citta}&appid={CHIAVE_API}&units=metric&lang=it"
-    #costruisce l'url per chiamare l'APi meteo
-    #units=metric -> serve per avere la temperatura in gradi celsius
-    #lang=it -> descrive il meteo in lingua italiana 
-    
     risposta = requests.get(url)
-    #Invia una richiesta get all'API
-    
     dati = risposta.json()
-    #converte la risposta ricevuta in formato json
-    
-    if risposta.status_code != 200:
-    #controlla se il server ha risposto con o senza errore
-    # status_code 200 sta a significare "tutto ok!"
 
+    if risposta.status_code != 200:
         return None
-        #se c'è errore non restituisce niente
-    
+
     temperatura = dati["main"]["temp"]
-    #Prende la temperatura dal json ricevuto
-    
     descrizione = dati["weather"][0]["description"]
-    #Prende la desscrizione del meteo dal json Es: soleggiato
-    
-    return temperatura, descrizione 
+
+    return temperatura, descrizione
+
+
+def salva_dati(citta, temperatura):
+    tempo = datetime.now()
+
+    dataframe = pd.DataFrame([[citta, tempo, temperatura]],
+                             columns=["citta", "tempo", "temperatura"])
+
+    dataframe.to_csv("dati.csv", mode="a", header=False, index=False)
+
+
+def mostra_grafico(citta):
+    try:
+        dataframe = pd.read_csv("dati.csv", names=["citta", "tempo", "temperatura"])
+    except:
+        print("Nessun dato salvato.")
+        return
+
+    dataframe = dataframe[dataframe["citta"] == citta]
+
+    if dataframe.empty:
+        print("Nessun dato per questa città.")
+        return
+
+    plt.plot(dataframe["tempo"], dataframe["temperatura"], marker="o")
+    plt.title(f"Andamento temperatura - {citta}")
+    plt.xlabel("Tempo")
+    plt.ylabel("Temperatura (°C)")
+    plt.xticks(rotation=45)
+    plt.grid(True,linestyle='--', alpha=0.5)
+    plt.tight_layout()
+    plt.savefig("aura.png")
+
+
+
+while True:
+    print("\n1. Cerca meteo")
+    print("2. Mostra grafico")
+    print("3. Esci")
+
+    scelta = input("Scelta: ")
+
+    if scelta == "1":
+        citta = input("Inserisci città: ")
+
+        risultato = ottieni_meteo(citta)
+
+        if risultato is None:
+            print("Città non trovata.")
+        else:
+            temperatura, descrizione = risultato
+
+            print(f"\nCittà: {citta}")
+            print(f"Temperatura: {temperatura}°C")
+            print(f"Meteo: {descrizione}")
+
+            salva_dati(citta, temperatura)
+
+    elif scelta == "2":
+        citta = input("Inserisci città per grafico: ")
+        mostra_grafico(citta)
+
+    elif scelta == "3":
+        break
+
+    else:
+        print("Scelta non valida.")
