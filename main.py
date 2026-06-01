@@ -1,4 +1,3 @@
-# Importiamo le funzioni dal modulo che abbiamo creato noi
 import funzioni_meteo
 
 def main():
@@ -17,7 +16,6 @@ def main():
         if scelta == "1":
             citta = input("\nInserisci il nome della città: ")
 
-            # Richiamiamo la funzione dal nostro modulo funzioni_meteo
             risultato = funzioni_meteo.ottieni_meteo(citta)
 
             if risultato is None:
@@ -29,7 +27,7 @@ def main():
                 print(f"🌡️ Temperatura: {temperatura}°C")
                 print(f"{emoji} Condizioni: {descrizione}")
 
-                # Salviamo i dati nel file CSV
+                
                 funzioni_meteo.salva_dati(citta, temperatura)
                 print("\n💾 Dati salvati correttamente nel file CSV!")
 
@@ -45,6 +43,5 @@ def main():
         else:
             print("⚠️ Scelta non valida. Inserisci un numero tra 1 e 3.")
 
-# Questo è il controllo che hai chiesto: avvia il programma solo se esegui DIRETTAMENTE questo file
 if __name__ == "__main__":
     main()

@@ -34,7 +34,7 @@ def ottieni_meteo(citta):
     temperatura = dati["main"]["temp"]
     descrizione = dati["weather"][0]["description"]
     
-    # Recuperiamo l'emoji giusta usando la nostra funzione interna
+    
     emoji = ottieni_emoji(descrizione)
 
     return temperatura, descrizione, emoji
@@ -60,7 +60,7 @@ def mostra_grafico(citta):
         print(f"Nessun dato registrato nel CSV per la città di: {citta}")
         return
 
-    # Creazione del grafico (lasciato semplice come il tuo)
+    
     plt.plot(dataframe["tempo"], dataframe["temperatura"], marker="o", color="blue")
     plt.title(f"Andamento temperatura - {citta}")
     plt.xlabel("Tempo (Data e Ora)")
@@ -69,4 +69,4 @@ def mostra_grafico(citta):
     plt.grid(True, linestyle='--', alpha=0.5)
     plt.tight_layout()
     plt.savefig("aura.png")
-    plt.show() # Mostra il grafico a schermo oltre a salvarlo
+    plt.show() 
